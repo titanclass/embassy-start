@@ -1,0 +1,62 @@
+name: Test
+
+on:
+  push:
+    branches: [ master ]
+
+  pull_request:
+    branches: [ master ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/cache@v2
+      with:
+        path: |
+          client/cargo/registry
+          client/.cargo/git
+          client/target
+          server/cargo/registry
+          server/.cargo/git
+          server/target
+        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}-${{ hashFiles('rust-toolchain.toml') }}
+    - uses: actions-rs/toolchain@v1
+      with:
+        toolchain: nightly-2021-12-16-x86_64
+        override: true
+        components: rustfmt, clippy
+
+    - name: LintA client
+      env:
+        RUSTFLAGS: -Dwarnings
+      working-directory: ./client
+      run: cargo clippy
+
+    - name: Format client
+      working-directory: ./client
+      run: cargo fmt -- --check
+
+    - name: Test client
+      working-directory: ./client
+      run: cargo test
+
+    - name: LintA server
+      env:
+        RUSTFLAGS: -Dwarnings
+      working-directory: ./server
+      run: cargo clippy
+
+    - name: Format server
+      working-directory: ./server
+      run: cargo fmt -- --check
+
+    - name: Test server
+      working-directory: ./server
+      run: cargo test

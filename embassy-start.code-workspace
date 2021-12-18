@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": "client"
+		},
+		{
+			"path": "network-protocol"
+		},
+		{
+			"path": "server"
+		},
+	],
+	"settings": {
+		"files.watcherExclude": {
+			"**/target": true
+		}
+	},
+}
