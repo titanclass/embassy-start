@@ -2,7 +2,8 @@ client
 ===
 
 A template for Embassy applications that attempts to connect to a server application on another board. This networking
-communication is performed via the Uart.
+communication is performed via the Uart. Visual Studio Code is assumed, but you should be able to use other editors
+and IDEs.
 
 The information provided here will apply reasonably to the server project also.
 
@@ -81,7 +82,7 @@ cargo run --no-default-features \
 Debugging the app
 ---
 
-For debugging (presently using a branch due to bug fixes):
+For debugging:
 
 ```
 cargo install --git https://github.com/probe-rs/probe-rs probe-rs-debugger

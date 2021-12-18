@@ -1,7 +1,9 @@
 Embassy start
 --
 
-A template repository that accomodates a couple of applications and a shared library.
+A template repository that accomodates a couple of applications and a shared library
+for embedded asynchronous Rust using the [Embassy](https://github.com/embassy-rs/embassy) executor and Hardware Abstraction Layers.
+
 The project consists of a client and a server that use the Uarte to communicate.
 
 Please consult the [client project](client/README.md)'s README for full instructions on how to get started.
