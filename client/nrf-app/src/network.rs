@@ -1,7 +1,10 @@
 use crate::bsp;
 
 use defmt::{debug, trace};
-use embassy::traits::uart::{Read, Write};
+use embassy::{
+    time::{self, Duration},
+    traits::uart::{Read, Write},
+};
 use embassy_nrf::{
     gpio::NoPin,
     uarte::{self, Uarte},
@@ -43,12 +46,17 @@ pub async fn main_task(p: bsp::NetworkPeripherals) {
             // Now we receive the server's response - again, the
             // entire buffer requires filling.
             debug!("Receiving");
-            if uarte.read(&mut buf).await.is_ok() {
+            if time::with_timeout(Duration::from_millis(5000), uarte.read(&mut buf))
+                .await
+                .is_ok()
+            {
                 trace!("Received {}", buf);
                 if let Ok(message) = postcard::from_bytes::<Message>(&buf) {
                     debug!("Received {:?}", message);
                 }
             }
         }
+
+        time::block_for(Duration::from_millis(1000));
     }
 }

@@ -51,6 +51,8 @@ cargo run --no-default-features \
   --features "nrf52840-dk"
 ```
 
+(change the `DEFMT_LOG` env as required or even omit it for no logging).
+
 Here's an example that runs on the nRF9160 DK in secure mode instead:
 
 ```
@@ -62,7 +64,14 @@ cargo run --no-default-features \
   --features "nrf9160-dk-s"
 ```
 
-(change the `DEFMT_LOG` env as required or even omit it for no logging).
+Similarly, for the microbit:v2:
+
+```
+PROBE_RUN_PROBE='0d28:0204' \
+DEFMT_LOG=debug \
+PROBE_RUN_CHIP='nrf52833_xxAA' \
+cargo run --target thumbv7em-none-eabihf --features "microbit-v2" --no-default-features
+```
 
 > If you are running wanting to run multiple devices from the same vendor and process type simultaneoulsy then you can use
 > the serial number for `PROBE_RUN_PROBE`. This is provided by `probe-run` e.g.

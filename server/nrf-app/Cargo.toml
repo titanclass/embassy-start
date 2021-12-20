@@ -12,6 +12,9 @@ defmt = "0.3"
 defmt-rtt = "0.3"
 embassy = { git = "https://github.com/embassy-rs/embassy.git", rev = "ad2f4694070104f8815563a0008141eec29c06cd", features = ["defmt"] }
 embassy-nrf = { git = "https://github.com/embassy-rs/embassy.git", rev = "ad2f4694070104f8815563a0008141eec29c06cd", features = ["defmt", "time-driver-rtc1", "gpiote"] }
+# Uncomment the next two and comment the two above if you're wanting to hack on Embassy
+#embassy = { path = "../../../../hacking/embassy/embassy", features = ["defmt"] }
+#embassy-nrf = { path = "../../../../hacking/embassy/embassy-nrf", features = ["defmt", "time-driver-rtc1", "gpiote"] }
 embedded-hal = "0.2.6"
 futures = { version = "0.3.17", default-features = false, features = ["async-await"] }
 heapless = "0.7.7"
@@ -34,5 +37,6 @@ default = [
     "nrf52840-dk"
 ]
 
+microbit-v2 = ["embassy-nrf/nrf52833"]
 nrf52840-dk = ["embassy-nrf/nrf52840"]
 nrf9160-dk-s = ["embassy-nrf/nrf9160-s"]

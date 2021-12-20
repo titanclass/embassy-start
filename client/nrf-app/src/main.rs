@@ -11,6 +11,8 @@ use panic_probe as _;
 mod boards;
 mod network;
 
+#[cfg(feature = "microbit-v2")]
+use crate::boards::microbit_v2 as bsp;
 #[cfg(feature = "nrf52840-dk")]
 use crate::boards::nrf52840_dk as bsp;
 #[cfg(feature = "nrf9160-dk-s")]
