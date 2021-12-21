@@ -64,6 +64,10 @@ cargo run --no-default-features \
   --features "nrf9160-dk-s"
 ```
 
+> Note that when using the nRF9160 DK, its IO voltage is 1.8V by default, whereas many boards are
+> 3V. You can set SW9 on the nRF9160 DK to 3V but be aware that this has the potential of 
+> interfering with its communications over NB-IOT etc.
+
 Similarly, for the microbit:v2:
 
 ```
