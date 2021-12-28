@@ -19,7 +19,7 @@ use crate::boards::stm32f767zi as bsp;
 
 #[embassy::main]
 async fn main(spawner: Spawner, p: Peripherals) {
-    info!("Network starting");
+    info!("Client starting");
 
     // The general idea is to initialise the board
     // specific peripherals that we will be using.

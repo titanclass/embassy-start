@@ -1,8 +1,33 @@
-# -*- coding: utf-8 -*-
+# -- coding: utf-8 --
 
 #+title: Log for STM/Embassy development
 #+author: Robert Walker
 #+STARTUP: overview
+
+* [2021-12-28 tis]
+:LOGBOOK:
+CLOCK: [2021-12-28 tis 08:12]--[2021-12-28 tis 09:12] =>  1:00
+:END:
+- Start on stm32f7 support
+- Test F7
+
+  PROBE_RUN_CHIP='STM32F767ZITx' \
+  DEFMT_LOG=debug \
+  cargo run --no-default-features \
+    --target thumbv7em-none-eabihf \
+    --features "stm32f767zi" \
+    --bin stm-server
+
+ - Submitted PR
+ - Setup client project
+
+  PROBE_RUN_CHIP='STM32F767ZITx' \
+  DEFMT_LOG=debug \
+  cargo run --no-default-features \
+    --target thumbv7em-none-eabihf \
+    --features "stm32f767zi" \
+    --bin stm-client
+- Need to fix linker script memory.x per feature, probably trough build.rs
 
 * [2021-12-27 mån] [100%]
 :LOGBOOK:
@@ -13,6 +38,7 @@ CLOCK: [2021-12-27 mån 07:53]--[2021-12-27 mån 08:45] =>  0:52
 - Stm-server compiles, how do I run it..
 
   PROBE_RUN_CHIP='STM32H743ZITx' \
+  DEFMT_LOG=debug \
   cargo run --no-default-features \
     --target thumbv7em-none-eabihf \
     --features "stm32h743zi" \
@@ -24,9 +50,19 @@ CLOCK: [2021-12-27 mån 07:53]--[2021-12-27 mån 08:45] =>  0:52
   - lssub shows the ST-LINK interface..., st-info shows the right H74x/H75x description..
   - Ok, I the port was wrong obviously, removed that, next problem, no flash memory ...
   - Got the wrong settings for the memory.x file, fixing that.
-- Success, program is now running on the host, but we do not have any debug output
+- Success, program is now running on the host
+    (HOST) INFO  flashing program (139 pages / 139.00 KiB)
+    (HOST) INFO  success!
+    (HOST) INFO  painting 126.53 KiB of RAM for stack usage estimation
+    ────────────────────────────────────────────────────────────────────────────────
+    INFO  Network starting
+    └─ stm_server::_embassymain::task::{generator#0} @ src/main.rs:19
+    DEBUG Network initialised
+    └─ stm_server::network::main_task::task::{generator#0} @ src/network.rs:26
+    DEBUG Receiving
+    └─ stm_server::network::main_task::task::{generator#0} @ src/network.rs:30
 
-* [2021-12-26 sön]
+* [2021-12-26 sön] [100%]
 :LOGBOOK:
 CLOCK: [2021-12-26 sön 09:34]--[2021-12-26 sön 10:37] =>  1:03
 :END:
@@ -40,4 +76,4 @@ CLOCK: [2021-12-26 sön 09:34]--[2021-12-26 sön 10:37] =>  1:03
 - DEFMT_LOG=X flag for printing the log
 - Created a server 'stm-app'.
 - Starting to map out the functionality of the Nordic chip
-- [ ] Rewrite the network.rs functionality.
+- [X] Rewrite the stm-server/network.rs functionality.

@@ -2,6 +2,7 @@
 members = [
     "app",
     "nrf-app",
+    "stm-app",
 ]
 resolver = "2"
 

@@ -2,7 +2,7 @@
 authors = ["Titan Class P/L"]
 edition = "2018"
 readme = "README.md"
-name = "stm-server"
+name = "stm-client"
 version = "0.1.0"
 
 [dependencies]
@@ -24,7 +24,7 @@ app = { path = "../app", features = ["defmt"]}
 network-protocol = { path = "../../network-protocol", features = ["defmt"]}
 
 [[bin]]
-name = "stm-server"
+name = "stm-client"
 test = false
 bench = false
 doc = false
