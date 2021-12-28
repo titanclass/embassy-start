@@ -1,0 +1,43 @@
+# -*- coding: utf-8 -*-
+
+#+title: Log for STM/Embassy development
+#+author: Robert Walker
+#+STARTUP: overview
+
+* [2021-12-27 mån] [100%]
+:LOGBOOK:
+CLOCK: [2021-12-27 mån 07:53]--[2021-12-27 mån 08:45] =>  0:52
+:END:
+- Looking into STM32 UART/USART code
+- Got issues getting Rust-analyzer to work, not sure whats going on.
+- Stm-server compiles, how do I run it..
+
+  PROBE_RUN_CHIP='STM32H743ZITx' \
+  cargo run --no-default-features \
+    --target thumbv7em-none-eabihf \
+    --features "stm32h743zi" \
+    --bin stm-server
+
+- [X] Have to skip logging for now, defmt problem, no Format for Ipv4Address found, I included embassy-net
+  Resolution: Had included embassy-net while working on the cargo file, not needed.
+- "Error: no probe was found..."
+  - lssub shows the ST-LINK interface..., st-info shows the right H74x/H75x description..
+  - Ok, I the port was wrong obviously, removed that, next problem, no flash memory ...
+  - Got the wrong settings for the memory.x file, fixing that.
+- Success, program is now running on the host, but we do not have any debug output
+
+* [2021-12-26 sön]
+:LOGBOOK:
+CLOCK: [2021-12-26 sön 09:34]--[2021-12-26 sön 10:37] =>  1:03
+:END:
+
+- Started with cloning and testing the embassy examples.
+- Cloned the forked Embassy-start project.
+- The organisation of the project is split in server/client, where there is a
+  base app and a derived app per chipset, was thrown off by the inclusion of
+  Microbit in the NRF part, but v2 actually have the nRF51822.
+- Flip link, swap the position of the stack so we do not overwrite it.
+- DEFMT_LOG=X flag for printing the log
+- Created a server 'stm-app'.
+- Starting to map out the functionality of the Nordic chip
+- [ ] Rewrite the network.rs functionality.
