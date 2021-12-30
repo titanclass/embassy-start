@@ -17,9 +17,14 @@ fn main() {
     // Put `memory.x` in our output directory and ensure it's
     // on the linker search path.
     let out = &PathBuf::from(env::var_os("OUT_DIR").unwrap());
+    let buf = if env::var_os("CARGO_FEATURE_STM32H743ZI").is_some() {
+        include_bytes!("stm32h743zi_memory.x")
+    } else {
+        include_bytes!("stm32f767zi_memory.x")
+    };
     File::create(out.join("memory.x"))
         .unwrap()
-        .write_all(include_bytes!("memory.x"))
+        .write_all(buf)
         .unwrap();
     println!("cargo:rustc-link-search={}", out.display());
 

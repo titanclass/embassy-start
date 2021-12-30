@@ -4,6 +4,33 @@
 #+author: Robert Walker
 #+STARTUP: overview
 
+* [2021-12-30 tor]
+:LOGBOOK:
+CLOCK: [2021-12-30 tor 08:31]
+:END:
+
+- Running the client on the H7 board
+
+  PROBE_RUN_PROBE='0483:374b:066BFF504955857567181349' \
+  PROBE_RUN_CHIP='STM32H743ZITx' \
+    DEFMT_LOG=debug \
+    cargo run --no-default-features \
+      --target thumbv7em-none-eabihf \
+      --features "stm32h743zi" \
+      --bin stm-client
+
+- Running the server on the F7 board
+
+  PROBE_RUN_PROBE='0483:374b:0672FF574953867567203227' \
+  PROBE_RUN_CHIP='STM32H743ZITx' \
+  DEFMT_LOG=debug \
+  cargo run --no-default-features \
+    --target thumbv7em-none-eabihf \
+    --features "stm32h743zi" \
+    --bin stm-server
+
+
+
 * [2021-12-29 ons]
 :LOGBOOK:
 CLOCK: [2021-12-29 ons 07:49]--[2021-12-29 ons 08:58] =>  1:09
