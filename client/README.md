@@ -14,7 +14,7 @@ You'll need the following toolchains:
 
 ```
 rustup update
-rustup target add thumbv7em-none-eabihf # for the nRF52840
+rustup target add thumbv7em-none-eabihf # for the nRF52840/stm32s
 rustup target add thumbv8m.main-none-eabihf # for the nRF9160
 ```
 
@@ -40,7 +40,7 @@ We also use flip-link so that we are more able to detect stack overflows:
 cargo install flip-link
 ```
 
-...then:
+...then if you want the nRF52840:
 
 ```
 PROBE_RUN_PROBE='1366:1015' \

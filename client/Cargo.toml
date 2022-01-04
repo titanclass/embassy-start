@@ -1,7 +1,7 @@
 [workspace]
 members = [
     "app",
-    "nrf-app",
+    "embedded-app",
 ]
 resolver = "2"
 
