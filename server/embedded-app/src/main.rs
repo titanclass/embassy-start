@@ -5,7 +5,10 @@
 use defmt::{info, unwrap};
 use defmt_rtt as _;
 use embassy::executor::Spawner;
+#[cfg(feature = "_nrf")]
 use embassy_nrf::Peripherals;
+#[cfg(feature = "_stm32")]
+use embassy_stm32::Peripherals;
 use panic_probe as _;
 
 mod boards;
@@ -17,6 +20,10 @@ use crate::boards::microbit_v2 as bsp;
 use crate::boards::nrf52840_dk as bsp;
 #[cfg(feature = "nrf9160-dk-s")]
 use crate::boards::nrf9160_dk_s as bsp;
+#[cfg(feature = "stm32f767zi")]
+use crate::boards::stm32f767zi as bsp;
+#[cfg(feature = "stm32h743zi")]
+use crate::boards::stm32h743zi as bsp;
 
 #[embassy::main]
 async fn main(spawner: Spawner, p: Peripherals) {

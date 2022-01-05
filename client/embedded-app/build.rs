@@ -17,9 +17,23 @@ fn main() {
     // Put `memory.x` in our output directory and ensure it's
     // on the linker search path.
     let out = &PathBuf::from(env::var_os("OUT_DIR").unwrap());
+    #[allow(clippy::if_same_then_else)]
+    let buf: &[u8] = if env::var_os("CARGO_FEATURE_MICROBIT_V2").is_some() {
+        include_bytes!("microbit_v2_memory.x")
+    } else if env::var_os("CARGO_FEATURE_NRF52840_DK").is_some() {
+        include_bytes!("nrf52840_dk_memory.x")
+    } else if env::var_os("CARGO_FEATURE_NRF9160_DK_S").is_some() {
+        include_bytes!("nrf9160_dk_s_memory.x")
+    } else if env::var_os("CARGO_FEATURE_STM32H743ZI").is_some() {
+        include_bytes!("stm32f743zi_memory.x")
+    } else if env::var_os("CARGO_FEATURE_STM32F767ZI").is_some() {
+        include_bytes!("stm32f767zi_memory.x")
+    } else {
+        panic!("Unknown target - cannot determine memory.x - aborting")
+    };
     File::create(out.join("memory.x"))
         .unwrap()
-        .write_all(include_bytes!("memory.x"))
+        .write_all(buf)
         .unwrap();
     println!("cargo:rustc-link-search={}", out.display());
 

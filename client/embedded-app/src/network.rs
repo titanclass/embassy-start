@@ -5,10 +5,13 @@ use embassy::{
     time::{self, Duration},
     traits::uart::{Read, Write},
 };
+#[cfg(feature = "_nrf")]
 use embassy_nrf::{
     gpio::NoPin,
     uarte::{self, Uarte},
 };
+#[cfg(feature = "_stm32")]
+use embassy_stm32::usart::{self, Uart};
 use heapless::String;
 use network_protocol::{Message, MAX_DATAGRAM_SIZE};
 
@@ -19,16 +22,7 @@ use network_protocol::{Message, MAX_DATAGRAM_SIZE};
 
 #[embassy::task(pool_size = 1)]
 pub async fn main_task(p: bsp::NetworkPeripherals) {
-    let uarte_config = uarte::Config::default();
-    let mut uarte = Uarte::new(
-        p.uarte,
-        p.uarte_interrupt,
-        p.uarte_rx_pin,
-        p.uarte_tx_pin,
-        NoPin,
-        NoPin,
-        uarte_config,
-    );
+    let mut uart = init_peripherals(p);
 
     debug!("Network initialised");
 
@@ -41,12 +35,12 @@ pub async fn main_task(p: bsp::NetworkPeripherals) {
             // we always know how many bytes to read. There are other
             // ways of doing this though.
             trace!("Sending {}", buf);
-            let _ = uarte.write(&buf).await;
+            let _ = uart.write(&buf).await;
 
             // Now we receive the server's response - again, the
             // entire buffer requires filling.
             debug!("Receiving");
-            if time::with_timeout(Duration::from_millis(5000), uarte.read(&mut buf))
+            if time::with_timeout(Duration::from_millis(5000), uart.read(&mut buf))
                 .await
                 .is_ok()
             {
@@ -59,4 +53,33 @@ pub async fn main_task(p: bsp::NetworkPeripherals) {
 
         time::block_for(Duration::from_millis(1000));
     }
+}
+
+#[cfg(feature = "_nrf")]
+fn init_peripherals<'a>(p: bsp::NetworkPeripherals) -> Uarte<'a, bsp::NetworkUarte> {
+    let uarte_config = uarte::Config::default();
+    Uarte::new(
+        p.uarte,
+        p.uarte_interrupt,
+        p.uarte_rx_pin,
+        p.uarte_tx_pin,
+        NoPin,
+        NoPin,
+        uarte_config,
+    )
+}
+
+#[cfg(feature = "_stm32")]
+fn init_peripherals<'a>(
+    p: bsp::NetworkPeripherals,
+) -> Uart<'a, bsp::NetworkUart, bsp::NetworkUartTxDma, bsp::NetworkUartRxDma> {
+    let uart_config = usart::Config::default();
+    Uart::new(
+        p.uart,
+        p.uart_rx_pin,
+        p.uart_tx_pin,
+        p.uart_tx_dma,
+        p.uart_rx_dma,
+        uart_config,
+    )
 }

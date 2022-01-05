@@ -4,3 +4,7 @@ pub mod microbit_v2;
 pub mod nrf52840_dk;
 #[cfg(feature = "nrf9160-dk-s")]
 pub mod nrf9160_dk_s;
+#[cfg(feature = "stm32f767zi")]
+pub mod stm32f767zi;
+#[cfg(feature = "stm32h743zi")]
+pub mod stm32h743zi;
