@@ -25,7 +25,7 @@ Testing the app
 cargo test
 ```
 
-Running the app on an nRF52840-dk
+Running the app
 ---
 
 Ensure that probe-run is installed:
@@ -76,7 +76,8 @@ DEFMT_LOG=debug \
 PROBE_RUN_CHIP='nrf52833_xxAA' \
 cargo run --target thumbv7em-none-eabihf --features "microbit-v2" --no-default-features
 ```
-For an STM32 board, like the Nucleo H743ZI, the command line would look like this:
+
+... and an STM32 board, like the Nucleo H743ZI:
 
 ```
 PROBE_RUN_PROBE='0483:374b' \
