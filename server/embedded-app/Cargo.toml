@@ -10,9 +10,9 @@ cortex-m = "0.7"
 cortex-m-rt = "0.7.1"
 defmt = "0.3"
 defmt-rtt = "0.3"
-embassy = { git = "https://github.com/embassy-rs/embassy.git", rev = "ad2f4694070104f8815563a0008141eec29c06cd", features = ["defmt"] }
-embassy-nrf = { git = "https://github.com/embassy-rs/embassy.git", rev = "ad2f4694070104f8815563a0008141eec29c06cd", features = ["defmt", "time-driver-rtc1", "gpiote"], optional = true }
-embassy-stm32 = { git = "https://github.com/embassy-rs/embassy.git", rev = "ad2f4694070104f8815563a0008141eec29c06cd", features = ["defmt", "time-driver-tim2"], optional = true }
+embassy = { git = "https://github.com/embassy-rs/embassy.git", rev = "e7668a86bd118ae8c4eb3e695130d7cac90c1dfe", features = ["defmt"] }
+embassy-nrf = { git = "https://github.com/embassy-rs/embassy.git", rev = "e7668a86bd118ae8c4eb3e695130d7cac90c1dfe", features = ["defmt", "time-driver-rtc1", "gpiote"], optional = true }
+embassy-stm32 = { git = "https://github.com/embassy-rs/embassy.git", rev = "e7668a86bd118ae8c4eb3e695130d7cac90c1dfe", features = ["defmt", "time-driver-tim2"], optional = true }
 # Uncomment the next two and comment the two above if you're wanting to hack on Embassy
 #embassy = { path = "../../../../hacking/embassy/embassy", features = ["defmt"] }
 #embassy-nrf = { path = "../../../../hacking/embassy/embassy-nrf", features = ["defmt", "time-driver-rtc1", "gpiote"], optional = true }

@@ -22,10 +22,11 @@ Testing the app
 ---
 
 ```
+cd app
 cargo test
 ```
 
-Running the app on an nRF52840-dk
+Running the app
 ---
 
 Ensure that probe-run is installed:
@@ -40,15 +41,13 @@ We also use flip-link so that we are more able to detect stack overflows:
 cargo install flip-link
 ```
 
-...then if you want the nRF52840:
+...then if you want the nRF52840, `cd embedded-app` and:
 
 ```
-PROBE_RUN_PROBE='1366:1015' \
 DEFMT_LOG=debug \
+PROBE_RUN_PROBE='1366:1015' \
 PROBE_RUN_CHIP='nrf52840_xxAA' \
-cargo run --no-default-features \
-  --target thumbv7em-none-eabihf \
-  --features "nrf52840-dk"
+cargo run
 ```
 
 (change the `DEFMT_LOG` env as required or even omit it for no logging).
@@ -56,8 +55,8 @@ cargo run --no-default-features \
 Here's an example that runs on the nRF9160 DK in secure mode instead:
 
 ```
-PROBE_RUN_PROBE='1366:1055' \
 DEFMT_LOG=debug \
+PROBE_RUN_PROBE='1366:1055' \
 PROBE_RUN_CHIP='nrf9160_xxAA' \
 cargo run --no-default-features \
   --target thumbv8m.main-none-eabihf \
@@ -71,17 +70,18 @@ cargo run --no-default-features \
 Similarly, for the microbit:v2:
 
 ```
-PROBE_RUN_PROBE='0d28:0204' \
 DEFMT_LOG=debug \
+PROBE_RUN_PROBE='0d28:0204' \
 PROBE_RUN_CHIP='nrf52833_xxAA' \
 cargo run --target thumbv7em-none-eabihf --features "microbit-v2" --no-default-features
 ```
-For an STM32 board, like the Nucleo H743ZI, the command line would look like this:
+
+... and an STM32 board, like the Nucleo H743ZI:
 
 ```
+DEFMT_LOG=debug \
 PROBE_RUN_PROBE='0483:374b' \
 PROBE_RUN_CHIP='STM32H743ZITx' \
-DEFMT_LOG=debug \
 cargo run --no-default-features --target thumbv7em-none-eabihf --features "stm32h743zi"
 ```
 
