@@ -30,6 +30,7 @@ jobs:
     - uses: actions-rs/toolchain@v1
       with:
         toolchain: nightly-2021-12-16-x86_64
+        target: thumbv7em-none-eabihf
         override: true
         components: rustfmt, clippy
 
@@ -37,7 +38,7 @@ jobs:
       env:
         RUSTFLAGS: -Dwarnings
       working-directory: ./client
-      run: cargo clippy
+      run: cargo clippy --target thumbv7em-none-eabihf
 
     - name: Format client
       working-directory: ./client
@@ -51,7 +52,7 @@ jobs:
       env:
         RUSTFLAGS: -Dwarnings
       working-directory: ./server
-      run: cargo clippy
+      run: cargo clippy --target thumbv7em-none-eabihf
 
     - name: Format server
       working-directory: ./server

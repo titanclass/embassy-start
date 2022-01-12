@@ -7,3 +7,4 @@ rustflags = [
 runner = "probe-run --measure-stack"
 
 [build]
+target = "thumbv7em-none-eabihf"

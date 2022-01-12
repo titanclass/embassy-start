@@ -13,6 +13,8 @@
 	"settings": {
 		"files.watcherExclude": {
 			"**/target": true
-		}
+		},
+    // Needed until https://github.com/rust-analyzer/rust-analyzer/issues/11268 is resolved
+    "rust-analyzer.cargo.target": "thumbv7em-none-eabihf"
 	},
 }
