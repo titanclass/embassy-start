@@ -57,11 +57,11 @@ jobs:
       working-directory: ./client/embedded-app
       run: cargo clippy --target thumbv7em-none-eabihf
 
-    - name: Format client app
+    - name: Format client embedded-app
       working-directory: ./client/embedded-app
       run: cargo fmt -- --check
 
-    - name: Test client app
+    - name: Test client embedded-app
       working-directory: ./client/embedded-app
       run: cargo test
 
