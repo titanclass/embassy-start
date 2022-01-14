@@ -28,7 +28,7 @@ jobs:
           network-protocol/target
           server/app/target
           server/embedded-app/target
-        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}-${{ hashFiles('rust-toolchain.toml') }}
+        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}-${{ hashFiles('**/rust-toolchain.toml') }}
     - uses: actions-rs/toolchain@v1
       with:
         toolchain: nightly-2021-12-16-x86_64
