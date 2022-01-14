@@ -1,20 +1,28 @@
 {
 	"folders": [
 		{
-			"path": "client"
+      "name": "client/app",
+			"path": "client/app"
+		},
+		{
+      "name": "client/embedded-app",
+			"path": "client/embedded-app"
 		},
 		{
 			"path": "network-protocol"
 		},
 		{
-			"path": "server"
+      "name": "server/app",
+			"path": "server/app"
+		},
+		{
+      "name": "server/embedded-app",
+			"path": "server/embedded-app"
 		},
 	],
 	"settings": {
 		"files.watcherExclude": {
 			"**/target": true
 		},
-    // Needed until https://github.com/rust-analyzer/rust-analyzer/issues/11268 is resolved
-    "rust-analyzer.cargo.target": "thumbv7em-none-eabihf"
 	},
 }
