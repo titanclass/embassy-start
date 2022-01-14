@@ -20,12 +20,14 @@ jobs:
     - uses: actions/cache@v2
       with:
         path: |
-          client/cargo/registry
-          client/.cargo/git
-          client/target
-          server/cargo/registry
-          server/.cargo/git
-          server/target
+          ./.cargo/registry/index
+          ./.cargo/registry/cache
+          ./.cargo/git
+          client/app/target
+          client/embedded-app/target
+          network-protocol/target
+          server/app/target
+          server/embedded-app/target
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}-${{ hashFiles('rust-toolchain.toml') }}
     - uses: actions-rs/toolchain@v1
       with:
