@@ -34,30 +34,76 @@ jobs:
         override: true
         components: rustfmt, clippy
 
-    - name: LintA client
+    - name: Lint client app
       env:
         RUSTFLAGS: -Dwarnings
-      working-directory: ./client
-      run: cargo clippy --target thumbv7em-none-eabihf
+      working-directory: ./client/app
+      run: cargo clippy
 
-    - name: Format client
-      working-directory: ./client
+    - name: Format client app
+      working-directory: ./client/app
       run: cargo fmt -- --check
 
-    - name: Test client
-      working-directory: ./client
+    - name: Test client app
+      working-directory: ./client/app
       run: cargo test
 
-    - name: LintA server
+
+    - name: Lint client embedded-app
       env:
         RUSTFLAGS: -Dwarnings
-      working-directory: ./server
+      working-directory: ./client/embedded-app
       run: cargo clippy --target thumbv7em-none-eabihf
 
-    - name: Format server
-      working-directory: ./server
+    - name: Format client app
+      working-directory: ./client/embedded-app
       run: cargo fmt -- --check
 
-    - name: Test server
-      working-directory: ./server
+    - name: Test client app
+      working-directory: ./client/embedded-app
+      run: cargo test
+
+      
+    - name: Lint network-protocol
+      env:
+        RUSTFLAGS: -Dwarnings
+      working-directory: ./network-protocol
+      run: cargo clippy
+
+    - name: Format network-protocol
+      working-directory: ./network-protocol
+      run: cargo fmt -- --check
+
+    - name: Test network-protocol
+      working-directory: ./network-protocol
+      run: cargo test
+
+
+    - name: Lint server app
+      env:
+        RUSTFLAGS: -Dwarnings
+      working-directory: ./server/app
+      run: cargo clippy
+
+    - name: Format server app
+      working-directory: ./server/app
+      run: cargo fmt -- --check
+
+    - name: Test server app
+      working-directory: ./server/app
+      run: cargo test
+
+
+    - name: Lint server embedded-app
+      env:
+        RUSTFLAGS: -Dwarnings
+      working-directory: ./server/embedded-app
+      run: cargo clippy --target thumbv7em-none-eabihf
+
+    - name: Format server embedded-app
+      working-directory: ./server/embedded-app
+      run: cargo fmt -- --check
+
+    - name: Test server embedded-app
+      working-directory: ./server/embedded-app
       run: cargo test
