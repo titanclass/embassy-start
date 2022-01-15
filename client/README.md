@@ -26,6 +26,21 @@ cd app
 cargo test
 ```
 
+An example test-harness binary is also available. This is useful to 
+exercise and explore parts of the application outside of an embedded context.
+The test harness provided uses the Menu crate to provide a simple command
+line experience. Menu can also be used very well on the embedded device 
+for where an shell experience is required e.g. configuration.
+
+To run the test harness, again from the `app` directory:
+
+> On Linux, you may also need to install a few extras.
+> For Ubuntu: `sudo apt-get install libncurses5-dev libncursesw5-dev`.
+
+```
+cargo run --example test-harness
+```
+
 Running the app
 ---
 
