@@ -7,16 +7,16 @@ version = "0.1.0"
 
 [dependencies]
 cortex-m = "0.7"
-cortex-m-rt = "0.7.1"
+cortex-m-rt = ">=0.6.15,<0.8"
 defmt = "0.3"
 defmt-rtt = "0.3"
-embassy = { git = "https://github.com/embassy-rs/embassy.git", rev = "e7668a86bd118ae8c4eb3e695130d7cac90c1dfe", features = ["defmt"] }
-embassy-nrf = { git = "https://github.com/embassy-rs/embassy.git", rev = "e7668a86bd118ae8c4eb3e695130d7cac90c1dfe", features = ["defmt", "time-driver-rtc1", "gpiote"], optional = true }
-embassy-stm32 = { git = "https://github.com/embassy-rs/embassy.git", rev = "e7668a86bd118ae8c4eb3e695130d7cac90c1dfe", features = ["defmt", "time-driver-tim2"], optional = true }
+embassy = { git = "https://github.com/embassy-rs/embassy.git", rev = "35636953b2048394733eaff95fad17970788d08a", features = ["defmt", "nightly"] }
+embassy-nrf = { git = "https://github.com/embassy-rs/embassy.git", rev = "35636953b2048394733eaff95fad17970788d08a", features = ["defmt", "time-driver-rtc1", "gpiote", "nightly"], optional = true }
+embassy-stm32 = { git = "https://github.com/embassy-rs/embassy.git", rev = "35636953b2048394733eaff95fad17970788d08a", features = ["defmt", "time-driver-tim2", "nightly"], optional = true }
 # Uncomment the next two and comment the two above if you're wanting to hack on Embassy
-#embassy = { path = "../../../../hacking/embassy/embassy", features = ["defmt"] }
-#embassy-nrf = { path = "../../../../hacking/embassy/embassy-nrf", features = ["defmt", "time-driver-rtc1", "gpiote"], optional = true }
-#embassy-stm32 = { path = "../../../../hacking/embassy-rs/embassy.git", features = ["defmt", "time-driver-tim2"], optional = true }
+#embassy = { path = "../../../../hacking/embassy/embassy", features = ["defmt", "nightly"] }
+#embassy-nrf = { path = "../../../../hacking/embassy/embassy-nrf", features = ["defmt", "time-driver-rtc1", "gpiote", "nightly"], optional = true }
+#embassy-stm32 = { path = "../../../../hacking/embassy-rs/embassy.git", features = ["defmt", "time-driver-tim2", "nightly"], optional = true }
 embedded-hal = "0.2.6"
 futures = { version = "0.3.17", default-features = false, features = ["async-await"] }
 heapless = "0.7.7"

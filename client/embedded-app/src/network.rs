@@ -1,15 +1,9 @@
 use crate::bsp;
 
 use defmt::{debug, trace};
-use embassy::{
-    time::{self, Duration},
-    traits::uart::{Read, Write},
-};
+use embassy::time::{self, Duration};
 #[cfg(feature = "_nrf")]
-use embassy_nrf::{
-    gpio::NoPin,
-    uarte::{self, Uarte},
-};
+use embassy_nrf::uarte::{self, Uarte};
 #[cfg(feature = "_stm32")]
 use embassy_stm32::usart::{self, Uart};
 use heapless::String;
@@ -63,8 +57,6 @@ fn init_peripherals<'a>(p: bsp::NetworkPeripherals) -> Uarte<'a, bsp::NetworkUar
         p.uarte_interrupt,
         p.uarte_rx_pin,
         p.uarte_tx_pin,
-        NoPin,
-        NoPin,
         uarte_config,
     )
 }
