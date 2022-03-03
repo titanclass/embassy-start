@@ -31,7 +31,7 @@ jobs:
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}-${{ hashFiles('**/rust-toolchain.toml') }}
     - uses: actions-rs/toolchain@v1
       with:
-        toolchain: nightly-2021-12-16-x86_64
+        toolchain: nightly-2022-02-20-x86_64
         target: thumbv7em-none-eabihf
         override: true
         components: rustfmt, clippy
