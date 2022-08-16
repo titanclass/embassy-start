@@ -9,7 +9,7 @@ use serde::{Deserialize, Serialize};
 /// must be one less than the max datagram
 /// size as we will be conveying the len
 /// in the first byte.
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub struct Message(pub heapless::String<31>);
 
