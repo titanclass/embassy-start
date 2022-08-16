@@ -4,7 +4,7 @@
 
 use defmt::{info, unwrap};
 use defmt_rtt as _;
-use embassy::executor::Spawner;
+use embassy_executor::executor::Spawner;
 #[cfg(feature = "_nrf")]
 use embassy_nrf::Peripherals;
 #[cfg(feature = "_stm32")]
@@ -25,7 +25,7 @@ use crate::boards::stm32f767zi as bsp;
 #[cfg(feature = "stm32h743zi")]
 use crate::boards::stm32h743zi as bsp;
 
-#[embassy::main]
+#[embassy_executor::main]
 async fn main(spawner: Spawner, p: Peripherals) {
     info!("Network starting");
 

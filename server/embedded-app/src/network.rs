@@ -13,7 +13,7 @@ use network_protocol::{Message, MAX_DATAGRAM_SIZE};
 // Postcard is particularly concise and intuitive in
 // its approach to serialising structs.
 
-#[embassy::task(pool_size = 1)]
+#[embassy_executor::task(pool_size = 1)]
 pub async fn main_task(p: bsp::NetworkPeripherals) {
     let mut uart = init_peripherals(p);
 
