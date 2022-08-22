@@ -4,11 +4,7 @@
 
 use defmt::{info, unwrap};
 use defmt_rtt as _;
-use embassy_executor::executor::Spawner;
-#[cfg(feature = "_nrf")]
-use embassy_nrf::Peripherals;
-#[cfg(feature = "_stm32")]
-use embassy_stm32::Peripherals;
+use embassy_executor::Spawner;
 use panic_probe as _;
 
 mod boards;
@@ -26,8 +22,13 @@ use crate::boards::stm32f767zi as bsp;
 use crate::boards::stm32h743zi as bsp;
 
 #[embassy_executor::main]
-async fn main(spawner: Spawner, p: Peripherals) {
+async fn main(spawner: Spawner) {
     info!("Network starting");
+
+    #[cfg(feature = "_nrf")]
+    let p = embassy_nrf::init(embassy_nrf::config::Config::default());
+    #[cfg(feature = "_stm32")]
+    let p = embassy_nrf::init(embassy_stm32::config::Config::default());
 
     // The general idea is to initialise the board
     // specific peripherals that we will be using.

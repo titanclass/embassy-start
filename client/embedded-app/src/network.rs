@@ -1,11 +1,11 @@
 use crate::bsp;
 
 use defmt::{debug, trace};
-use embassy_executor::time::{self, Duration};
 #[cfg(feature = "_nrf")]
 use embassy_nrf::uarte::{self, Uarte};
 #[cfg(feature = "_stm32")]
 use embassy_stm32::usart::{self, Uart};
+use embassy_time::{self, Duration};
 use heapless::String;
 use network_protocol::{Message, MAX_DATAGRAM_SIZE};
 
@@ -34,7 +34,7 @@ pub async fn main_task(p: bsp::NetworkPeripherals) {
             // Now we receive the server's response - again, the
             // entire buffer requires filling.
             debug!("Receiving");
-            if time::with_timeout(Duration::from_millis(5000), uart.read(&mut buf))
+            if embassy_time::with_timeout(Duration::from_millis(5000), uart.read(&mut buf))
                 .await
                 .is_ok()
             {
@@ -45,7 +45,7 @@ pub async fn main_task(p: bsp::NetworkPeripherals) {
             }
         }
 
-        time::block_for(Duration::from_millis(1000));
+        embassy_time::block_for(Duration::from_millis(1000));
     }
 }
 
