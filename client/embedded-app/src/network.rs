@@ -70,6 +70,7 @@ fn init_peripherals<'a>(
         p.uart,
         p.uart_rx_pin,
         p.uart_tx_pin,
+        p.uart_interrupt,
         p.uart_tx_dma,
         p.uart_rx_dma,
         uart_config,
