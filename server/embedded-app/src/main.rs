@@ -28,7 +28,7 @@ async fn main(spawner: Spawner) {
     #[cfg(feature = "_nrf")]
     let p = embassy_nrf::init(embassy_nrf::config::Config::default());
     #[cfg(feature = "_stm32")]
-    let p = embassy_nrf::init(embassy_stm32::config::Config::default());
+    let p = embassy_stm32::init(embassy_stm32::Config::default());
 
     // The general idea is to initialise the board
     // specific peripherals that we will be using.
